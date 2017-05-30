@@ -1,0 +1,23 @@
+{
+  "owners": [],
+  "nickname": "MitchHedbot",
+  "nick_password": "oauth:#################",
+  "alt_nicks": [],
+  "username": "MitchHedbot",
+  "realname": "Mitch Hedbot",
+  "server": "irc.chat.twitch.tv",
+  "port": 6667,
+  "password": "oauth:###################",
+  "use_ssl": false,
+  "encoding": "UTF-8",
+  "channels": ["#Channel", "#Channel2", "#Channel3"],
+  "channel_keys": {},
+  "umodes": "+RB-x",
+  "ping_time": 180,
+  "ping_timeout": 10,
+  "options": {
+    "minTime": "5",
+    "maxTime": "10",
+    "quoteFile": "quotes.txt"
+  }
+}
