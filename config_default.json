@@ -18,6 +18,7 @@
   "options": {
     "minTime": "5",
     "maxTime": "10",
-    "quoteFile": "quotes.txt"
+    "quoteFile": "quotes.txt",
+    "spawnThread": "yes"
   }
 }

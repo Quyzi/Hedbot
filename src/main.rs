@@ -25,21 +25,23 @@ fn main() {
 	let server = IrcServer::new("config.json").unwrap();
 	server.identify().unwrap();
 
-	let mintime: u64 = u64::from_str(server.config().get_option("minTime")).unwrap() * 60; // 20 minutes
-	let maxtime: u64 = u64::from_str(server.config().get_option("maxTime")).unwrap() * 60; // 35 minutes
+	let mintime: u64 = u64::from_str(server.config().get_option("minTime")).unwrap() * 60; 
+	let maxtime: u64 = u64::from_str(server.config().get_option("maxTime")).unwrap() * 60; 
 
 	let lines: Vec<String> = lines_from_file(&server.config().get_option("quoteFile"));
 	let mut rng = thread_rng();
 
-	let server2 = server.clone();
-	spawn(move || {
-		server2.iter().map(|m| print!("{}", m.unwrap())).count();
-	});
+	if server.config().get_option("spawnThread") == "yes" {
+		let server2 = server.clone();
+		spawn(move || {
+			server2.iter().map(|m| print!("{}", m.unwrap())).count();
+		});
+	}
 
 	loop {
+		let line = rng.gen_range(0, lines.len());
 		for channel in server.config().channels() {
-			let line = rng.gen_range(0, lines.len());
-			println!("{}", lines[line]);
+			println!("Sending #{} to \"{}\"", line, channel);
 			server.send_privmsg(channel, &lines[line]).expect("Something wrong");
 		}
 		thread::sleep(time::Duration::from_secs(rng.gen_range(mintime, maxtime)));
