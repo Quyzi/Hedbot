@@ -6,3 +6,4 @@ authors = ["Quyzi <obercgit@gmail.com>"]
 [dependencies]
 irc = "~0.11"
 rand = "0.3"
+colored = "^1.5"

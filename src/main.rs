@@ -1,9 +1,10 @@
 extern crate irc;
 extern crate rand;
+extern crate colored;
 
 use irc::client::prelude::*;
-
 use rand::{Rng, thread_rng};
+use colored::*;
 
 use std::io::prelude::*;
 use std::str::FromStr;
@@ -41,7 +42,7 @@ fn main() {
 	loop {
 		let line = rng.gen_range(0, lines.len());
 		for channel in server.config().channels() {
-			println!("Sending #{} to \"{}\"", line, channel);
+			println!("Sending Quote #{} to {}", line, channel.yellow());
 			server.send_privmsg(channel, &lines[line]).expect("Something wrong");
 		}
 		thread::sleep(time::Duration::from_secs(rng.gen_range(mintime, maxtime)));
